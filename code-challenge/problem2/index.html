@@ -1,0 +1,110 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fancy Form</title>
+
+  <!-- You may add more stuff here -->
+  <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="left-panel">
+      <form onsubmit="return !1">
+        <h3>Currency Swap</h3>
+        <div class="swap-row">
+          <!-- FROM -->
+          <div class="row">
+            <div class="row-container">
+            <label id="labelFrom" style="color:grey">Send</label>
+              <div class="select-container">
+                <div class="select-box">
+                  <div class="image-dropdown-container">
+                  <img
+                    id="fromImg"
+                    src="https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/BLUR.svg"
+                    />
+                  </div>
+                  
+                  <select id="fromSelect"></select>
+                  <span class="arrow">▼</span>
+                </div>
+                <div class="input-box">
+                  <input id="input-amount" type="number" title="Error"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swap-btn">⇅</div>
+          <!-- TO -->
+          <div class="row">
+            <div class="row-container">
+              <label id="labelTo"  style="color:grey">Receive</label>
+              <div class="select-container">
+                <div class="select-box">
+                  <div class="image-dropdown-container">
+                    <img
+                    id="toImg"
+                    src="https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/BLUR.svg"
+                    />
+                  </div>
+                  <select id="toSelect"></select>
+                  <span class="arrow">▼</span>
+                </div>
+                <div class="input-box">
+                  <input id="output-amount" type="number" readonly/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="total-container">
+          <div class="fee-row">
+            <span>Gas Fee</span>
+            <span id="gas-fee"></span>
+          </div>
+        
+          <div class="fee-row">
+            <span>Swap Fee</span>
+            <span id="swap-fee"></span>
+          </div>
+        
+          <div class="divider"></div>
+        
+          <div class="total-row">
+            <span>Total Receive</span>
+            <span id="total-receive"></span>
+          </div>
+        </div>
+        
+        <button class="cfm-btn" id="swapBtn" onclick="submitBtn()">CONFIRM SWAP</button>
+      </form>
+
+      <div class="footer-text"> 
+        © 2026 Fancy Form Interface 
+      </div>
+      
+    </div>
+
+    <div class="right-panel">
+      <div class="slide active">
+        <img src="https://www.oliverwymanforum.com/content/dam/oliver-wyman/ow-forum/future-of-money/Crypto_QA_GettyImages-1331517257.jpg" />
+      </div>
+      <div class="slide">
+        <img src="https://www.bitcoinsistemi.com/wp-content/uploads/2025/11/BTCUSDT_2025-11-03_18-46-19.png" />
+      </div>
+      <div class="slide">
+        <img src="https://raw.githubusercontent.com/smoove/cli-crypto-charts/master/screenshot.png" />
+      </div>
+
+     <button id="prevSlideBtn" class="nav-button" onclick="prevSlide()">&#10094;</button>
+     <button id="nextSlideBtn" class="nav-button" onclick="nextSlide()">&#10095;</button>
+    </div>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+
+</html>

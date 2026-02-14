@@ -1,0 +1,63 @@
+Problem 3 : Messy React
+
+
+Issue 1: blockchain property missing from WalletBalance interface
+-WalletBalance interface doesn't define blockchain, but it's used in the code.
+Improvement: 
+interface WalletBalance {
+  currency: string;
+  amount: number;
+  blockchain: string; // Added missing property
+}  
+
+Issue 2: getPriority is using `any` instead of 'string'
+-TypeScript cannot detect mistakes 
+-Runtime bugs increase
+-If user typo something like getPriority("Etherum"); no error will be shown
+Improvement: Declare a string type or union type 
+E.g.: 
+const getPriority = (blockchain: string): number =>
+or
+type: Blockchain = "Osmosis"| "Etheruem" |.... ; 
+const getPriority = (blockchain: Blockchain): number => 
+
+Issue 3: Variable lhsPriority is used but not declared 
+-runtime error
+-should be balancePriority instead of lhsPriority
+Improvement:
+const balancePriority = getPriority(balance.blockchain);
+    if (balancePriority > -99) { 
+        ....
+
+Issue 4: Incorrect Filter Logic
+- Filter logic keeps amount <=0 (negative/zero balances), which doesn't not make sense for displaying wallet
+Improvement: remove if statement and
+return balance.amount > 0 && balancePriority > -99;
+
+Issue 5: Missing default return in sort for equal priorities
+-Currently it doesn't return a value when priorities are equal
+Improvement: add default return after sort
+return 0; 
+
+Issue 6: Unnecessary 'prices' dependency affects performance
+-prices is in useMemo dependency but never used  
+Improvement: Remove unused dependency
+[balances, prices]); to [balances]);
+
+Issue 7: Wrong variable used in map
+-formattedBalances is created but never used, sortedBalances is WalletBalance[]
+Improvement: Change const rows = sortedBalances.map to 
+const rows = formattedBalances.map((balance: FormattedWalletBalance) => {
+
+Issue 8: Missing toFixed() precision
+-Defaults to 0 decimal places 
+Improvement: Can add at least 4 decimals since it's for currency
+formatted: balance.amount.toFixed(4)
+
+Issue 9: Using Index as Key
+-Using array index as key can cause rendering issues with dynamic lists
+Improvement: use unique combination, change key={index} to 
+key={`${balance.currency}-${balance.blockchain}`}
+
+
+*Assuming that BoxProps, useWalletBalances(), usePrices(), and useMemo() are correctly implemented, as well as correct type definitions, error handling, and styling applied* 
